@@ -1,0 +1,7 @@
+[package]
+name = "yandex_checkout"
+version = "0.1.0"
+authors = ["Alexander Andreev <andreevlex.as@gmail.com>"]
+edition = "2018"
+
+[dependencies]
