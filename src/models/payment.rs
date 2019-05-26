@@ -6,6 +6,7 @@ use crate::models::metadata::Metadata;
 use crate::models::payment_method::PaymentMethod;
 use crate::models::receipt::ReceiptRegistrationStatus;
 use crate::models::recipient::Recipient;
+use chrono::prelude::*;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
@@ -14,7 +15,7 @@ pub struct Payment {
     pub id: String,
 
     #[serde(rename = "status")]
-    pub status: String,
+    pub status: PaymentStatus,
 
     #[serde(rename = "amount")]
     pub amount: Amount,
@@ -29,13 +30,13 @@ pub struct Payment {
     pub payment_method: PaymentMethod,
 
     #[serde(rename = "captured_at")]
-    pub captured_at: Option<String>,
+    pub captured_at: Option<DateTime<Utc>>,
 
     #[serde(rename = "created_at")]
-    pub created_at: String,
+    pub created_at: DateTime<Utc>,
 
     #[serde(rename = "expires_at")]
-    pub expires_at: Option<String>,
+    pub expires_at: Option<DateTime<Utc>>,
 
     #[serde(rename = "confirmation")]
     pub confirmation: Confirmation,
@@ -60,4 +61,16 @@ pub struct Payment {
 
     #[serde(rename = "metadata")]
     pub metadata: Metadata,
+}
+
+#[derive(Serialize, Deserialize)]
+pub enum PaymentStatus {
+    #[serde(rename = "pending")]
+    Pending,
+    #[serde(rename = "waiting_for_capture")]
+    WaitingForCapture,
+    #[serde(rename = "succeeded")]
+    Succeeded,
+    #[serde(rename = "canceled")]
+    Canceled,
 }
