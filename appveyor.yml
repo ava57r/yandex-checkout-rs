@@ -23,4 +23,4 @@ test_script:
   # Собираем
   - cargo build --verbose
   # Запускаем тесты
-- cargo test --verbose
+  - cargo test --verbose
