@@ -59,3 +59,11 @@ pub struct NewPayment {
     pub metadata: Option<Metadata>,
     pub airline: Option<Airline>,
 }
+
+#[derive(Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub struct CapturePayment {
+    pub amount: Option<Amount>,
+    pub receipt: Option<Receipt>,
+    pub airline: Option<Airline>,
+}
