@@ -1,24 +1,16 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
-pub struct Confirmation {
-    #[serde(rename = "type")]
-    pub confirmation_type: ConfirmationType,
-
-    #[serde(rename = "enforce")]
-    pub enforce: Option<bool>,
-
-    #[serde(rename = "return_url")]
-    pub return_url: Option<String>,
-
-    #[serde(rename = "confirmation_url")]
-    pub confirmation_url: Option<String>, // required when type = redirect
+#[serde(tag = "type", rename_all = "snake_case")]
+pub enum Confirmation {
+    External,
+    Redirect(Redirect),
 }
 
 #[derive(Serialize, Deserialize)]
-pub enum ConfirmationType {
-    #[serde(rename = "redirect")]
-    Redirect,
-    #[serde(rename = "external")]
-    External,
+#[serde(rename_all = "snake_case")]
+pub struct Redirect {
+    pub enforce: Option<bool>,
+    pub return_url: Option<String>,
+    pub confirmation_url: String,
 }
