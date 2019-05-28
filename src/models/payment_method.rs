@@ -1,53 +1,73 @@
-use crate::models::card::Card;
+use crate::models::payer_bank_details::PayerBankDetails;
+use crate::models::vat_data::VatData;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
-pub struct PaymentMethod {
-    #[serde(rename = "type")]
-    pub payment_method_type: PaymentMethodType,
+#[serde(tag = "type")]
+pub enum PaymentMethod {
+    #[serde(rename = "alfabank")]
+    Alfabank(AlfabankType),
+    #[serde(rename = "apple_pay")]
+    ApplePay(ApplePayType),
 
-    #[serde(rename = "id")]
-    pub id: String,
+    #[serde(rename = "b2b_sberbank")]
+    B2BSberbank(B2BSberbankType),
 
-    #[serde(rename = "saved")]
-    pub saved: bool,
+    #[serde(rename = "sberbank")]
+    Sberbank,
 
-    #[serde(rename = "card")]
-    pub card: Option<Card>,
+    #[serde(rename = "bank_card")]
+    BankCard,
 
-    #[serde(rename = "title")]
-    pub title: String,
+    #[serde(rename = "cash")]
+    Cash,
 
-    #[serde(rename = "title")]
-    pub login: String,
+    #[serde(rename = "yandex_money")]
+    YandexMoney,
+
+    #[serde(rename = "qiwi")]
+    Qiwi,
+
+    #[serde(rename = "webmoney")]
+    Webmoney,
+
+    #[serde(rename = "mobile_balance")]
+    MobileBalance,
+
+    #[serde(rename = "installments")]
+    Installments,
+
+    #[serde(rename = "psb")]
+    Psb,
+
+    #[serde(rename = "google_pay")]
+    GooglePay,
 }
 
 #[derive(Serialize, Deserialize)]
-pub enum PaymentMethodType {
-    #[serde(rename = "sberbank")]
-    Sberbank,
-    #[serde(rename = "bank_card")]
-    BankCard,
-    #[serde(rename = "cash")]
-    Cash,
-    #[serde(rename = "yandex_money")]
-    YandexMoney,
-    #[serde(rename = "qiwi")]
-    Qiwi,
-    #[serde(rename = "alfabank")]
-    Alfabank,
-    #[serde(rename = "webmoney")]
-    Webmoney,
-    #[serde(rename = "apple_pay")]
-    ApplePay,
-    #[serde(rename = "mobile_balance")]
-    MobileBalance,
-    #[serde(rename = "installments")]
-    Installments,
-    #[serde(rename = "psb")]
-    Psb,
-    #[serde(rename = "google_pay")]
-    GooglePay,
-    #[serde(rename = "b2b_sberbank")]
-    B2BSberbank,
+#[serde(rename_all = "snake_case")]
+pub struct AlfabankType {
+    pub id: String,
+    pub saved: bool,
+    pub title: Option<String>,
+    pub login: Option<String>,
+}
+
+#[derive(Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub struct ApplePayType {
+    pub id: String,
+    pub saved: bool,
+    pub title: Option<String>,
+}
+
+#[derive(Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub struct B2BSberbankType {
+    pub id: String,
+    pub saved: bool,
+    pub title: Option<String>,
+    pub payment_purpose: String,
+    pub vat_data: VatData,
+    pub payer_bank_details: PayerBankDetails,
 }
