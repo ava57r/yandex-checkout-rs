@@ -1,19 +1,38 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
 pub struct Card {
-    #[serde(rename = "first6")]
     pub first6: String,
-
-    #[serde(rename = "last4")]
     pub last4: String,
-
-    #[serde(rename = "expiry_month")]
     pub expiry_month: String,
-
-    #[serde(rename = "expiry_year")]
     pub expiry_year: String,
+    pub card_type: CardType,
+}
 
-    #[serde(rename = "card_type")]
-    pub card_type: String,
+#[derive(Serialize, Deserialize)]
+pub enum CardType {
+    #[serde(rename = "MasterCard")]
+    MasterCard,
+
+    #[serde(rename = "Visa")]
+    Visa,
+
+    #[serde(rename = "Mir")]
+    Mir,
+
+    #[serde(rename = "UnionPay")]
+    UnionPay,
+
+    #[serde(rename = "JCB")]
+    JCB,
+
+    #[serde(rename = "AmericanExpress")]
+    AmericanExpress,
+
+    #[serde(rename = "DinersClub")]
+    DinersClub,
+
+    #[serde(rename = "Unknown")]
+    Unknown,
 }
