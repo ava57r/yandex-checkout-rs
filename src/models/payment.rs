@@ -4,7 +4,7 @@ use crate::models::authorization_details::AuthorizationDetails;
 use crate::models::cancellation_details::CancellationDetails;
 use crate::models::confirmation::Confirmation;
 use crate::models::metadata::Metadata;
-use crate::models::payment_method::PaymentMethod;
+use crate::models::payment_method::{PaymentMethod, PaymentMethodData};
 use crate::models::receipt::Receipt;
 use crate::models::receipt::ReceiptRegistrationStatus;
 use crate::models::recipient::Recipient;
@@ -51,7 +51,7 @@ pub struct NewPayment {
     pub recipient: Option<Recipient>,
     pub payment_token: Option<String>,
     pub payment_method_id: Option<String>,
-    pub payment_method_data: Option<PaymentMethod>,
+    pub payment_method_data: Option<PaymentMethodData>,
     pub confirmation: Option<Confirmation>,
     pub save_payment_method: Option<bool>,
     pub capture: Option<bool>,
