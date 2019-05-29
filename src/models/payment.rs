@@ -2,7 +2,7 @@ use crate::models::airline::Airline;
 use crate::models::amount::Amount;
 use crate::models::authorization_details::AuthorizationDetails;
 use crate::models::cancellation_details::CancellationDetails;
-use crate::models::confirmation::Confirmation;
+use crate::models::confirmation::{Confirmation, NewConfirmation};
 use crate::models::metadata::Metadata;
 use crate::models::payment_method::{PaymentMethod, PaymentMethodData};
 use crate::models::receipt::Receipt;
@@ -52,7 +52,7 @@ pub struct NewPayment {
     pub payment_token: Option<String>,
     pub payment_method_id: Option<String>,
     pub payment_method_data: Option<PaymentMethodData>,
-    pub confirmation: Option<Confirmation>,
+    pub confirmation: Option<NewConfirmation>,
     pub save_payment_method: Option<bool>,
     pub capture: Option<bool>,
     pub client_ip: Option<String>,
