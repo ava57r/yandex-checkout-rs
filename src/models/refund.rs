@@ -1,3 +1,4 @@
+use crate::common::RefundId;
 use crate::models::amount::Amount;
 use crate::models::receipt::Receipt;
 use chrono::prelude::*;
@@ -6,7 +7,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub struct Refund {
-    pub id: String,
+    pub id: RefundId,
     pub payment_id: String,
     pub status: RefundStatus,
     pub created_at: DateTime<Utc>,

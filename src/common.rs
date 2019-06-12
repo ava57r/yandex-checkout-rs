@@ -1,9 +1,10 @@
 use std::collections::HashMap;
 use std::fmt;
 
+use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct PaymentId(String);
 
 impl PaymentId {
@@ -40,7 +41,7 @@ pub fn advanced_headers(idempotency_key: Option<String>) -> HashMap<&'static str
     advanced_headers
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct RefundId(String);
 
 impl RefundId {

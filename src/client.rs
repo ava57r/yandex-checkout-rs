@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use std::io::Read;
 
-use crate::error::{Error, ErrorResponse, RequestError};
+use crate::error::{Error, RequestError};
 use reqwest;
 use reqwest::header::{HeaderMap, HeaderName, HeaderValue};
 use reqwest::RequestBuilder;
@@ -121,15 +121,13 @@ fn handle_request<T: DeserializeOwned>(request: RequestBuilder) -> Response<T> {
 
     let status = response.status();
     if !status.is_success() {
-        let mut err = serde_json::from_str(&body).unwrap_or_else(|err| {
-            let mut req = ErrorResponse {
-                error: RequestError::default(),
-            };
-            req.error.description = Some(format!("failed to deserialize error: {}", err));
+        let mut err: RequestError = serde_json::from_str(&body).unwrap_or_else(|err| {
+            let mut req = RequestError::default();
+            req.description = Some(format!("failed to deserialize error: {}", err));
             req
         });
-        err.error.http_status = status.as_u16();
-        return Err(Error::from(err.error));
+        err.http_status = status.as_u16();
+        return Err(Error::from(err));
     }
 
     serde_json::from_str(&body).map_err(Error::Serde)

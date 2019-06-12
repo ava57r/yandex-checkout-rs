@@ -1,3 +1,4 @@
+use crate::common::PaymentId;
 use crate::models::airline::Airline;
 use crate::models::amount::Amount;
 use crate::models::authorization_details::AuthorizationDetails;
@@ -8,13 +9,14 @@ use crate::models::payment_method::{PaymentMethod, PaymentMethodData};
 use crate::models::receipt::Receipt;
 use crate::models::receipt::ReceiptRegistrationStatus;
 use crate::models::recipient::Recipient;
+
 use chrono::prelude::*;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub struct Payment {
-    pub id: String,
+    pub id: PaymentId,
     pub status: PaymentStatus,
     pub amount: Amount,
     pub description: Option<String>,

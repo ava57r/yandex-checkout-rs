@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use crate::error::{Error, ErrorResponse, RequestError};
+use crate::error::{Error, RequestError};
 use futures::future::{self, Future};
 use futures::Stream;
 use reqwest;
@@ -148,16 +148,14 @@ fn handle_request<T: DeserializeOwned + Send + 'static>(
                 std::io::copy(&mut body, &mut bytes)?;
 
                 if !status.is_success() {
-                    let mut err = serde_json::from_slice(&bytes).unwrap_or_else(|err| {
-                        let mut req = ErrorResponse {
-                            error: RequestError::default(),
-                        };
-                        req.error.description =
-                            Some(format!("failed to deserialize error: {}", err));
-                        req
-                    });
-                    err.error.http_status = status.as_u16();
-                    return Err(Error::from(err.error));
+                    let mut err: RequestError =
+                        serde_json::from_slice(&bytes).unwrap_or_else(|err| {
+                            let mut req = RequestError::default();
+                            req.description = Some(format!("failed to deserialize error: {}", err));
+                            req
+                        });
+                    err.http_status = status.as_u16();
+                    return Err(Error::from(err));
                 }
 
                 serde_json::from_slice(&bytes).map_err(Error::Serde)

@@ -67,8 +67,3 @@ pub struct RequestError {
 
     pub parameter: Option<String>,
 }
-
-#[derive(Debug, Deserialize)]
-pub struct ErrorResponse {
-    pub error: RequestError,
-}
