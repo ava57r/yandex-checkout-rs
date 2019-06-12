@@ -1,5 +1,4 @@
-use crate::client::ApiClient;
-use crate::error::ApiResult;
+use crate::r#async::{ApiClient, ResponseFuture};
 
 pub struct SettingsServiceImpl {
     client: ApiClient,
@@ -14,11 +13,11 @@ impl SettingsServiceImpl {
 }
 
 pub trait SettingsService {
-    fn settings(&self) -> ApiResult<serde_json::Value>;
+    fn settings(&self) -> ResponseFuture<serde_json::Value>;
 }
 
 impl SettingsService for SettingsServiceImpl {
-    fn settings(&self) -> ApiResult<serde_json::Value> {
+    fn settings(&self) -> ResponseFuture<serde_json::Value> {
         self.client.get(Self::BASE_PATH)
     }
 }
