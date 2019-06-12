@@ -54,16 +54,17 @@ pub struct RequestError {
     /// The HTTP status in the response.
     #[serde(skip_deserializing)]
     pub http_status: u16,
-
     /// The type of error returned.
     #[serde(rename = "type")]
     pub error_type: String,
-
-    pub id: String,
+    /// The error ID
+    pub id: Option<String>,
 
     pub code: Option<String>,
-
+    /// Detailed description of the error.
     pub description: Option<String>,
-
+    /// The name of the parameter that caused the error.
     pub parameter: Option<String>,
+    /// The recommended number of milliseconds after which to retry the query.
+    pub retry_after: Option<String>,
 }
