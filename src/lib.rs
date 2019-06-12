@@ -1,6 +1,12 @@
+pub mod r#async;
+pub mod client;
+pub mod common;
+pub mod config;
+pub mod error;
 pub mod models;
-
-pub const ENDPOINT_API: &str = "https://payment.yandex.net/api/v3/";
+pub mod payment_service;
+pub mod refund_service;
+pub mod settings_service;
 
 #[cfg(test)]
 mod tests {}

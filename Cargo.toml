@@ -9,3 +9,8 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 chrono = { version = "0.4", features = ["serde"] }
 iso4217 = "0.3.2"
+reqwest = "0.9.18"
+failure = "0.1.5"
+log ="0.4.6"
+uuid = "0.7.4"
+futures = "0.1.27"
