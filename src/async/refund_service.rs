@@ -1,9 +1,8 @@
 use std::collections::HashMap;
 
-use crate::client::ApiClient;
 use crate::common::{advanced_headers, RefundId};
-use crate::error::ApiResult;
 use crate::models::refund::{NewRefund, Refund};
+use crate::r#async::{ApiClient, ResponseFuture};
 
 pub struct RefundServiceImpl {
     client: ApiClient,
@@ -18,18 +17,18 @@ impl RefundServiceImpl {
 }
 
 pub trait RefundService {
-    fn find_one(&self, refund_id: RefundId) -> ApiResult<Refund>;
+    fn find_one(&self, refund_id: RefundId) -> ResponseFuture<Refund>;
 
-    fn create(&self, params: NewRefund, idempotency_key: Option<String>) -> ApiResult<Refund>;
+    fn create(&self, params: NewRefund, idempotency_key: Option<String>) -> ResponseFuture<Refund>;
 }
 
 impl RefundService for RefundServiceImpl {
-    fn find_one(&self, refund_id: RefundId) -> ApiResult<Refund> {
+    fn find_one(&self, refund_id: RefundId) -> ResponseFuture<Refund> {
         let request_path = format!("{}/{}", Self::BASE_PATH, refund_id);
         self.client.get(request_path.as_str())
     }
 
-    fn create(&self, params: NewRefund, idempotency_key: Option<String>) -> ApiResult<Refund> {
+    fn create(&self, params: NewRefund, idempotency_key: Option<String>) -> ResponseFuture<Refund> {
         let advanced_headers: Option<HashMap<&'static str, String>> =
             advanced_headers(idempotency_key).into();
 
