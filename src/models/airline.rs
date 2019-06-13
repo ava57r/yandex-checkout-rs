@@ -10,7 +10,7 @@ pub struct Airline {
 }
 
 impl Airline {
-    pub fn new(passengers: Vec<Passenger>, legs: Vec<Leg>,) -> Self {
+    pub fn new(passengers: Vec<Passenger>, legs: Vec<Leg>) -> Self {
         Airline {
             passengers,
             legs,

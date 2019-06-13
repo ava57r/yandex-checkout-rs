@@ -1,0 +1,8 @@
+{
+    "id": "ecf255db-cce8-4f15-8fc2-3d7a4678c867",
+    "type": "error",
+    "description": "Invalid API key provided",
+    "parameter": "payment_method",
+    "retry_after": "1800",
+    "code": "invalid_request"
+  }
