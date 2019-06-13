@@ -28,20 +28,8 @@ fn create_payment<S: PaymentService>(service: &S) -> Payment {
         value: "0".to_string(),
         currency: "RUB".to_string(),
     };
-    let new_payment = NewPayment {
-        amount,
-        description: None,
-        receipt: None,
-        recipient: None,
-        payment_token: None,
-        payment_method_id: None,
-        payment_method_data: None,
-        confirmation: None,
-        save_payment_method: None,
-        capture: None,
-        client_ip: None,
-        metadata: None,
-        airline: None,
-    };
-    service.create(new_payment, None).expect("Cannot run create")
+    let new_payment = NewPayment::new(amount);
+    service
+        .create(new_payment, None)
+        .expect("Cannot run create")
 }
