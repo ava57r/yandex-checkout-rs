@@ -62,7 +62,99 @@ pub struct NewPayment {
     pub airline: Option<Airline>,
 }
 
-#[derive(Serialize, Deserialize)]
+impl NewPayment {
+    pub fn new(amount: Amount) -> Self {
+        NewPayment {
+            amount,
+            description: None,
+            receipt: None,
+            recipient: None,
+            payment_token: None,
+            payment_method_id: None,
+            payment_method_data: None,
+            confirmation: None,
+            save_payment_method: None,
+            capture: None,
+            client_ip: None,
+            metadata: None,
+            airline: None,
+        }
+    }
+
+    pub fn description(mut self, value: String) -> Self {
+        self.description = Some(value);
+
+        self
+    }
+
+    pub fn receipt(mut self, value: Receipt) -> Self {
+        self.receipt = Some(value);
+
+        self
+    }
+
+    pub fn recipient(mut self, value: Recipient) -> Self {
+        self.recipient = Some(value);
+
+        self
+    }
+
+    pub fn payment_token(mut self, value: String) -> Self {
+        self.payment_token = Some(value);
+
+        self
+    }
+
+    pub fn payment_method_id(mut self, value: String) -> Self {
+        self.payment_method_id = Some(value);
+
+        self
+    }
+
+    pub fn payment_method_data(mut self, value: PaymentMethodData) -> Self {
+        self.payment_method_data = Some(value);
+
+        self
+    }
+
+    pub fn confirmation(mut self, value: NewConfirmation) -> Self {
+        self.confirmation = Some(value);
+
+        self
+    }
+
+    pub fn save_payment_method(mut self, value: bool) -> Self {
+        self.save_payment_method = Some(value);
+
+        self
+    }
+
+    pub fn capture(mut self, value: bool) -> Self {
+        self.capture = Some(value);
+
+        self
+    }
+
+    pub fn client_ip(mut self, value: String) -> Self {
+        self.client_ip = Some(value);
+
+        self
+    }
+
+    pub fn metadata(mut self, value: Metadata) -> Self {
+        self.metadata = Some(value);
+
+        self
+    }
+
+    pub fn airline(mut self, value: Airline) -> Self {
+        self.airline = Some(value);
+
+        self
+    }
+}
+
+#[derive(Serialize, Deserialize, Default)]
 #[serde(rename_all = "snake_case")]
 pub struct CapturePayment {
     pub amount: Option<Amount>,

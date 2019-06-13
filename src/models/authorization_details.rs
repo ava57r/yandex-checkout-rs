@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Default)]
 pub struct AuthorizationDetails {
     #[serde(rename = "rrn")]
     pub rrn: Option<String>,

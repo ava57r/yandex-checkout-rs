@@ -18,6 +18,35 @@ pub struct Receipt {
     pub email: Option<String>,
 }
 
+impl Receipt {
+    pub fn new(items: Vec<ReceiptItem>) -> Self {
+        Receipt {
+            items,
+            tax_system_code: None,
+            phone: None,
+            email: None,
+        }
+    }
+
+    pub fn tax_system_code(mut self, value: u32) -> Self {
+        self.tax_system_code = Some(value);
+
+        self
+    }
+
+    pub fn phone(mut self, value: String) -> Self {
+        self.phone = Some(value);
+
+        self
+    }
+
+    pub fn email(mut self, value: String) -> Self {
+        self.email = Some(value);
+
+        self
+    }
+}
+
 #[derive(Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub struct ReceiptItem {
