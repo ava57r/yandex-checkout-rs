@@ -14,3 +14,6 @@ failure = "0.1.5"
 log ="0.4.6"
 uuid = "0.7.4"
 futures = "0.1.27"
+
+[dev-dependencies]
+tokio = "0.1.21"
