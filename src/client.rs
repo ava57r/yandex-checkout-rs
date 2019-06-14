@@ -26,7 +26,8 @@ impl ApiClient {
 
     pub fn get<T: DeserializeOwned>(&self, path: &str) -> Response<T> {
         let url = self.url(path);
-        let request = self.client.get(&url).headers(self.headers());
+        let mut request = self.client.get(&url).headers(self.headers());
+        request = self.auth(request);
 
         handle_request(request)
     }
@@ -45,7 +46,8 @@ impl ApiClient {
         };
 
         let body: String = serde_json::to_string(&form)?;
-        let request = self.client.post(&url).headers(headers).body(body);
+        let mut request = self.client.post(&url).headers(headers).body(body);
+        request = self.auth(request);
 
         handle_request(request)
     }
@@ -62,7 +64,8 @@ impl ApiClient {
             self.headers()
         };
 
-        let request = self.client.post(&url).headers(headers);
+        let mut request = self.client.post(&url).headers(headers);
+        request = self.auth(request);
 
         handle_request(request)
     }
@@ -78,26 +81,24 @@ impl ApiClient {
             HeaderValue::from_str("application/json").unwrap(),
         );
 
+        headers
+    }
+
+    fn auth(&self, mut request: RequestBuilder) -> RequestBuilder {
         if let Some(auth_token) = self.config.auth_token.as_ref() {
-            headers.insert(
-                reqwest::header::AUTHORIZATION,
-                HeaderValue::from_str(&format!("Bearer {}", auth_token)).unwrap(),
-            );
+            request = request.bearer_auth(auth_token);
         } else {
             if let (Some(account_id), Some(secret_key)) = (
                 self.config.account_id.as_ref(),
                 self.config.secret_key.as_ref(),
             ) {
-                headers.insert(
-                    reqwest::header::AUTHORIZATION,
-                    HeaderValue::from_str(&format!("{}:{}", account_id, secret_key)).unwrap(),
-                );
+                request = request.basic_auth(account_id, Some(secret_key));
             } else {
                 log::warn!("Not set `account_id` and `secret_key`");
             }
         }
 
-        headers
+        request
     }
 
     fn with_advanced_headers(&self, advanced_headers: HashMap<&'static str, String>) -> HeaderMap {
