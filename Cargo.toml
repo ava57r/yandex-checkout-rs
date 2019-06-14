@@ -2,7 +2,20 @@
 name = "yandex_checkout"
 version = "0.1.0"
 authors = ["Alexander Andreev <andreevlex.as@gmail.com>"]
+description = "Yandex.Checkout API Rust Client Library."
+homepage = "https://github.com/andreevlex/yandex-checkout-rs"
+repository = "https://github.com/andreevlex/yandex-checkout-rs"
+documentation = "https://docs.rs/yandex-checkout"
+keywords = ["yandex-kassa", "api-client"]
+readme = "README.md"
+license = "MIT"
 edition = "2018"
+
+exclude = [
+    "appveyor.yml",
+    ".travis.yml",
+    ".gitignore",
+]
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
