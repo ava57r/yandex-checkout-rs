@@ -1,0 +1,33 @@
+{
+    "id": "22e12f66-000f-5000-8000-18db351245c7",
+    "status": "succeeded",
+    "paid": true,
+    "amount": {
+      "value": "2.00",
+      "currency": "RUB"
+    },
+    "captured_at": "2018-07-18T11:17:33.483Z",
+    "created_at": "2018-07-18T10:51:18.139Z",
+    "description": "Заказ №72",
+    "metadata": {
+      
+    },
+    "payment_method": {
+      "type": "bank_card",
+      "id": "22e12f66-000f-5000-8000-18db351245c7",
+      "saved": false,
+      "card": {
+        "first6": "555555",
+        "last4": "4444",
+        "expiry_month": "07",
+        "expiry_year": "2022",
+        "card_type": "MasterCard"
+      },
+      "title": "Bank card *4444"
+    },
+    "refunded_amount": {
+      "value": "0.00",
+      "currency": "RUB"
+    },
+    "test": false
+  }
