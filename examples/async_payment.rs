@@ -14,12 +14,15 @@ use yandex_checkout::r#async::payment_service::{PaymentService, PaymentServiceIm
 use yandex_checkout::r#async::ApiClient;
 
 fn main() {
+    env_logger::init();
+
     tokio::run(fetch());
 }
 
 fn fetch() -> impl Future<Item = (), Error = ()> {
     let config = Configuration {
-        account_id: Some("account_id".to_string()),
+        account_id: Some("yandex_test1".to_string()),
+        secret_key:Some("d1da36613493".to_string()),
         ..Configuration::default()
     };
     let client = ApiClient::new(config, reqwest::r#async::Client::new());

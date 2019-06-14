@@ -8,7 +8,8 @@ use yandex_checkout::payment_service::{PaymentService, PaymentServiceImpl};
 
 fn main() {
     let config = Configuration {
-        account_id: Some("account_id".to_string()),
+        account_id: Some("yandex_test1".to_string()),
+        secret_key: Some("123456".to_string()),
         ..Configuration::default()
     };
     let client = ApiClient::new(config, reqwest::Client::new());
