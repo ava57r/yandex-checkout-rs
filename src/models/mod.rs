@@ -12,3 +12,18 @@ pub mod receipt;
 pub mod recipient;
 pub mod refund;
 pub mod vat_data;
+
+pub use airline::*;
+pub use amount::*;
+pub use authorization_details::*;
+pub use cancellation_details::*;
+pub use card::*;
+pub use confirmation::*;
+pub use metadata::*;
+pub use payer_bank_details::*;
+pub use payment::*;
+pub use payment_method::*;
+pub use receipt::*;
+pub use recipient::*;
+pub use refund::*;
+pub use vat_data::*;
