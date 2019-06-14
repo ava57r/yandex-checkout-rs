@@ -3,8 +3,7 @@ extern crate yandex_checkout;
 use yandex_checkout::client::ApiClient;
 use yandex_checkout::common::PaymentId;
 use yandex_checkout::config::Configuration;
-use yandex_checkout::models::amount::Amount;
-use yandex_checkout::models::payment::{NewPayment, Payment};
+use yandex_checkout::models::{Amount, NewPayment, Payment};
 use yandex_checkout::payment_service::{PaymentService, PaymentServiceImpl};
 
 fn main() {
